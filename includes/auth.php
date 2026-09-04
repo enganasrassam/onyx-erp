@@ -3,6 +3,7 @@
  * نظام المصادقة — تسجيل الدخول، الجلسات، الصلاحيات
  */
 require_once __DIR__ . '/../config/database.php';
+require_once __DIR__ . '/functions.php';
 
 // بدء الجلسة
 if (session_status() === PHP_SESSION_NONE) {

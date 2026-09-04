@@ -15,8 +15,5 @@ $options = [
 try {
     $pdo = new PDO($dsn, DB_USER, DB_PASS, $options);
 } catch (PDOException $e) {
-    if (defined('DISPLAY_ERRORS') && DISPLAY_ERRORS) {
-        die("خطأ في الاتصال بقاعدة البيانات: " . $e->getMessage());
-    }
-    die("تعذّر الاتصال بقاعدة البيانات. تحقق من الإعدادات.");
+    die("خطأ في الاتصال بقاعدة البيانات: " . $e->getMessage() . "<br><br>تحقق من:<br>1. أن خادم MySQL يعمل<br>2. أن قاعدة البيانات '" . DB_NAME . "' موجودة<br>3. عدّل config/config.php بمعلومات الاتصال الصحيحة");
 }
