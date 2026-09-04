@@ -2,49 +2,51 @@
 
 // تبديل القوائم الفرعية في الشريط الجانبي
 function toggleSubmenu(button) {
-    const submenu = button.nextElementSibling;
-    const chevron = button.querySelector('.chevron');
-    if (submenu) {
-        submenu.classList.toggle('hidden');
-        if (chevron) chevron.classList.toggle('expanded');
+    button.classList.toggle('expanded');
+    var submenu = button.nextElementSibling;
+    if (submenu && submenu.classList.contains('sidebar-submenu')) {
+        submenu.classList.toggle('open');
     }
 }
 
 // فلترة القائمة الجانبية بالبحث
 function filterMenu(query) {
-    const nav = document.getElementById('sidebar-nav');
+    var nav = document.getElementById('sidebar-nav');
     if (!nav) return;
 
     query = query.trim().toLowerCase();
-    const items = nav.querySelectorAll('li');
 
     if (!query) {
-        // إعادة عرض الكل
-        items.forEach(item => {
-            item.style.display = '';
-            const sub = item.querySelector('ul');
-            if (sub) sub.classList.add('hidden');
-        });
+        var items = nav.querySelectorAll('li');
+        items.forEach(function(item) { item.style.display = ''; });
+        var submenus = nav.querySelectorAll('.sidebar-submenu');
+        submenus.forEach(function(s) { s.classList.remove('open'); });
+        var parents = nav.querySelectorAll('.sidebar-parent');
+        parents.forEach(function(p) { p.classList.remove('expanded'); });
         return;
     }
 
-    items.forEach(item => {
-        const link = item.querySelector('a, button');
-        if (!link) return;
-        const text = link.textContent.toLowerCase();
-        const matches = text.includes(query);
+    var items = nav.querySelectorAll('li');
+    items.forEach(function(item) { item.style.display = 'none'; });
 
-        if (matches) {
+    items.forEach(function(item) {
+        var link = item.querySelector('a.sidebar-item, button.sidebar-item');
+        if (!link) return;
+        var text = link.textContent.toLowerCase();
+        if (text.includes(query)) {
             item.style.display = '';
-            // إظهار الآباء
-            let parent = item.parentElement;
+            var parent = item.parentElement;
             while (parent && parent !== nav) {
                 if (parent.tagName === 'LI') parent.style.display = '';
-                if (parent.tagName === 'UL') parent.classList.remove('hidden');
+                if (parent.classList && parent.classList.contains('sidebar-submenu')) {
+                    parent.classList.add('open');
+                }
+                var prev = parent.previousElementSibling;
+                if (prev && prev.classList && prev.classList.contains('sidebar-parent')) {
+                    prev.classList.add('expanded');
+                }
                 parent = parent.parentElement;
             }
-        } else {
-            item.style.display = 'none';
         }
     });
 }
