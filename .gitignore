@@ -1,0 +1,40 @@
+# Git Ignore - نظام أونكس ERP
+
+# الإعدادات المحلية
+config/local.php
+config/local-config.php
+
+# ملفات النظام
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+*.cache
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Dependencies
+node_modules/
+vendor/
+composer.lock
+
+#/uploads
+uploads/
+!uploads/.gitkeep
+
+# Database
+*.sqlite
+*.db
+
+# Environment
+.env
+.env.local
+
+# Don't ignore important files
+!.htaccess
+!README.md

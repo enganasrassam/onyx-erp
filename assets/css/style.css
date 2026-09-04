@@ -1,0 +1,235 @@
+/* ============================================================
+   نظام أونكس ERP — الأنماط الرئيسية
+   مطابق لتصميم نظام أونكس الأصلي (شريط جانبي داكن نيلي)
+   ============================================================ */
+
+:root {
+  --sidebar-bg: #1e1b4b;
+  --sidebar-fg: #e0e7ff;
+  --sidebar-border: #312e81;
+  --sidebar-accent: #312e81;
+  --sidebar-active: #4f46e5;
+  --primary: #4f46e5;
+  --primary-fg: #ffffff;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  font-family: 'Cairo', 'Tajawal', sans-serif;
+  background: #f8fafc;
+  color: #1e293b;
+}
+
+/* الشريط الجانبي */
+.onyx-sidebar {
+  background: linear-gradient(180deg, #1e1b4b 0%, #312e81 100%);
+  color: var(--sidebar-fg);
+}
+
+.sidebar-search {
+  width: 100%;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: var(--sidebar-fg);
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  outline: none;
+  transition: all 0.2s;
+}
+.sidebar-search:focus {
+  background: rgba(255,255,255,0.1);
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.3);
+}
+.sidebar-search::placeholder { color: rgba(224, 231, 255, 0.4); }
+
+/* عناصر القائمة */
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.375rem 1rem;
+  font-size: 0.875rem;
+  color: rgba(224, 231, 255, 0.9);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-decoration: none;
+  text-align: right;
+}
+.sidebar-item:hover {
+  background: var(--sidebar-accent);
+  color: #fff;
+}
+.sidebar-item-active {
+  background: var(--sidebar-active);
+  color: #fff;
+  font-weight: 600;
+}
+.sidebar-item-disabled {
+  color: rgba(224, 231, 255, 0.3);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.chevron {
+  transition: transform 0.2s;
+}
+.chevron.expanded {
+  transform: rotate(-90deg);
+}
+
+/* البطاقات */
+.card {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+.card-header {
+  background: #f8fafc;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 1rem;
+  font-weight: 600;
+}
+.card-body { padding: 1rem; }
+
+/* الجداول */
+.table {
+  width: 100%;
+  margin: 0;
+  font-size: 0.875rem;
+}
+.table thead th {
+  background: #f1f5f9;
+  color: #475569;
+  font-weight: 700;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  padding: 0.625rem 0.75rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+.table tbody tr:hover {
+  background: #f8fafc;
+}
+.table tbody td {
+  padding: 0.625rem 0.75rem;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+/* الشارات */
+.badge-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.125rem 0.5rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+.badge-status::before {
+  content: '';
+  width: 0.375rem;
+  height: 0.375rem;
+  border-radius: 9999px;
+  background: currentColor;
+}
+
+/* الأزرار */
+.btn-primary {
+  background: linear-gradient(135deg, #4f46e5, #4338ca);
+  border: none;
+  color: #fff;
+  font-weight: 600;
+}
+.btn-primary:hover {
+  background: linear-gradient(135deg, #4338ca, #3730a3);
+}
+
+/* النماذج */
+.form-control, .form-select {
+  font-size: 0.875rem;
+  border-color: #cbd5e1;
+}
+.form-control:focus, .form-select:focus {
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+}
+
+/* RTL fixes */
+[dir="rtl"] .table thead th,
+[dir="rtl"] .table tbody td {
+  text-align: right;
+}
+[dir="rtl"] .table thead th.text-left,
+[dir="rtl"] .table tbody td.text-left {
+  text-align: left;
+}
+[dir="rtl"] .table thead th.text-center,
+[dir="rtl"] .table tbody td.text-center {
+  text-align: center;
+}
+
+/* التمرير */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: #f1f5f9; }
+::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+/* النوافذ المنبثقة */
+.modal-backdrop {
+  background: rgba(15, 23, 42, 0.5);
+  backdrop-filter: blur(4px);
+}
+
+/* البطاقات الإحصائية */
+.stat-card {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  transition: all 0.2s;
+}
+.stat-card:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  border-color: #c7d2fe;
+}
+.stat-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+/* الصفحة الفارغة */
+.empty-state {
+  padding: 3rem;
+  text-align: center;
+  color: #94a3b8;
+}
+
+/* خط أحادي العرض */
+.font-mono { font-family: 'Cairo', monospace; }
+
+/* شارة الحالة */
+.text-emerald-700 { color: #047857; }
+.text-rose-700 { color: #be123c; }
+.text-amber-700 { color: #b45309; }
+.text-blue-700 { color: #1d4ed8; }
+.bg-emerald-50 { background-color: #ecfdf5; }
+.bg-rose-50 { background-color: #fff1f2; }
+.bg-amber-50 { background-color: #fffbeb; }
+.bg-blue-50 { background-color: #eff6ff; }
+.bg-slate-100 { background-color: #f1f5f9; }
+.text-emerald-700 { color: #047857; }
+.text-slate-700 { color: #334155; }
+.text-slate-500 { color: #64748b; }
+.text-slate-400 { color: #94a3b8; }
