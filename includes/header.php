@@ -4,6 +4,7 @@
  * مطابق لتصميم نظام أونكس الأصلي
  */
 require_once __DIR__ . '/auth.php';
+require_once __DIR__ . '/sidebar.php';
 require_login();
 
 $user = current_user();
