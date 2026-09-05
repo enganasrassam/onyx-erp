@@ -123,10 +123,11 @@ function db_insert(string $table, array $data): int {
 }
 
 function db_update(string $table, array $data, string $where, array $whereParams = []): int {
-    $set = implode(', ', array_map(fn($k) => "`{$k}` = ?", array_keys($data)));
+    global $pdo;
+    $set = implode(', ', array_map(function($k) { return "`{$k}` = ?"; }, array_keys($data)));
     $sql = "UPDATE `{$table}` SET {$set} WHERE {$where}";
-    db_query($sql, array_merge(array_values($data), $whereParams));
-    return db_query("SELECT ROW_COUNT()")->fetchColumn();
+    $stmt = db_query($sql, array_merge(array_values($data), $whereParams));
+    return $stmt->rowCount();
 }
 
 function db_delete(string $table, string $where, array $params = []): void {

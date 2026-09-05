@@ -3,7 +3,7 @@ require_once __DIR__ . '/../includes/header.php';
 $id = (int)($_GET['id'] ?? 0);
 $inv = db_fetch_one("SELECT i.*, c.code as currency_code, c.symbol FROM invoices i LEFT JOIN currencies c ON i.currency_id=c.id WHERE i.id = ?", [$id]);
 $lines = db_fetch_all("SELECT il.*, it.code as item_code, it.name_ar as item_name, u.name_ar as unit_name FROM invoice_lines il JOIN items it ON il.item_id=it.id LEFT JOIN units u ON il.unit_id=u.id WHERE il.invoice_id = ? ORDER BY il.line_number", [$id]);
-if (!$inv) { flash('error', 'الفاتورة غير موجودة'); redirect(APP_URL . '/operations/purchase-invoices.php'); }
+if (!$inv) { flash('error', 'الفاتورة غير موجودة'); redirect(APP_URL . '/operations/' . ($inv['type'] ?? 'purchase') . '-invoices.php'); }
 $STATUS = ['draft'=>['مسودة','bg-slate-100 text-slate-700'],'posted'=>['مرحّل','bg-emerald-50 text-emerald-700'],'cancelled'=>['ملغي','bg-rose-50 text-rose-700'],'paid'=>['مدفوعة','bg-blue-50 text-blue-700']];
 $st = $STATUS[$inv['status']] ?? $STATUS['draft'];
 ?>
@@ -33,6 +33,6 @@ $st = $STATUS[$inv['status']] ?? $STATUS['draft'];
         <div class="col-md-3"><div class="bg-gradient-to-l from-indigo-500 to-purple-600 text-white rounded p-2 text-center"><p class="small opacity-80 mb-0">الإجمالي</p><p class="font-mono fw-bold mb-0" dir="ltr"><?= number_format($inv['total_local'], 2) ?> <?= sanitize($inv['currency_code']) ?></p></div></div>
     </div>
     <?php if ($inv['notes']): ?><div class="mt-3 bg-slate-50 rounded p-2 small"><strong>ملاحظات:</strong> <?= sanitize($inv['notes']) ?></div><?php endif; ?>
-    <div class="mt-3"><a href="<?= APP_URL ?>/operations/<?= $inv['type'] ?>-invoices.php" class="btn btn-secondary">رجوع</a></div>
+    <div class="mt-3"><a href="<?= APP_URL . '/operations/' . $inv['type'] . '-invoices.php' ?>" class="btn btn-secondary">رجوع</a></div>
 </div></div>
 <?php require_once __DIR__ . '/../includes/footer.php'; ?>
