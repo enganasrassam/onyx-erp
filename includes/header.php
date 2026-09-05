@@ -1,7 +1,7 @@
 <?php
 /**
- * Header — بداية الصفحة + الشريط الجانبي + الشريط العلوي
- * مطابق 100% لتصميم نظام أونكس الأصلي
+ * Header — مطابق لنظام أونكس الأصلي
+ * يحتوي على: شريط جانبي + شريط علوي + شريط أدوات
  */
 require_once __DIR__ . '/auth.php';
 require_once __DIR__ . '/functions.php';
@@ -29,13 +29,11 @@ $todayAr = $days[date('l')] . '، ' . date('d') . ' ' . $months[(int)date('n')] 
 <body>
 
 <div class="onyx-layout">
-    <!-- الشريط الجانبي -->
-    <aside class="onyx-sidebar" style="width: 280px; flex-shrink: 0;">
+    <!-- ===== الشريط الجانبي ===== -->
+    <aside class="onyx-sidebar">
         <!-- شعار النظام -->
         <div class="sidebar-brand">
-            <div class="sidebar-brand-logo">
-                <span>أ</span>
-            </div>
+            <div class="sidebar-brand-logo"><span>أ</span></div>
             <div>
                 <h1>نظام أونكس</h1>
                 <p>ERP — الإصدار 8</p>
@@ -48,15 +46,13 @@ $todayAr = $days[date('l')] . '، ' . date('d') . ' ' . $months[(int)date('n')] 
         </div>
 
         <!-- شجرة الشاشات -->
-        <nav id="sidebar-nav" style="padding: 8px 0; flex: 1; overflow-y: auto;">
+        <nav id="sidebar-nav" style="padding: 4px 0; flex: 1; overflow-y: auto;">
             <?php echo render_sidebar_menu($activeMenu); ?>
         </nav>
 
         <!-- المستخدم الحالي -->
         <div class="sidebar-user">
-            <div class="sidebar-user-avatar">
-                <span><?= mb_substr($user['full_name'], 0, 1) ?></span>
-            </div>
+            <div class="sidebar-user-avatar"><span><?= mb_substr($user['full_name'], 0, 1) ?></span></div>
             <div class="sidebar-user-info">
                 <p class="sidebar-user-name"><?= sanitize($user['full_name']) ?></p>
                 <p class="sidebar-user-role" dir="ltr">@<?= sanitize($user['username']) ?> · <?= sanitize($user['role']) ?></p>
@@ -67,7 +63,7 @@ $todayAr = $days[date('l')] . '، ' . date('d') . ' ' . $months[(int)date('n')] 
         </div>
     </aside>
 
-    <!-- المحتوى الرئيسي -->
+    <!-- ===== المحتوى الرئيسي ===== -->
     <div class="onyx-main">
         <!-- الشريط العلوي -->
         <header class="onyx-header">
@@ -75,11 +71,7 @@ $todayAr = $days[date('l')] . '، ' . date('d') . ' ' . $months[(int)date('n')] 
                 <h2><?= sanitize($pageTitle) ?></h2>
                 <p>نظام أونكس ERP — تخطيط موارد المؤسسة</p>
             </div>
-            <div class="onyx-header-search">
-                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-                <input type="text" placeholder="بحث سريع...">
-            </div>
-            <div class="onyx-header-date">
+            <div class="onyx-header-info">
                 <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
                 <span><?= $todayAr ?></span>
             </div>
