@@ -156,13 +156,13 @@ function get_menu_sections(): array {
                 [
                     'label' => 'تهيئة أنظمة الحسابات', 'icon' => 'database',
                     'children' => [
-                        ['id' => 'setup-accounts-variables', 'label' => 'متغيرات الأستاذ العام', 'url_path' => 'setup/system-variables.php', 'badge' => 'قريبًا'],
+                        ['id' => 'setup-accounts-variables', 'label' => 'متغيرات الأستاذ العام', 'url_path' => 'setup/system-variables.php'],
                     ],
                 ],
                 [
                     'label' => 'تهيئة أنظمة المخازن', 'icon' => 'boxes',
                     'children' => [
-                        ['id' => 'setup-inventory-variables', 'label' => 'متغيرات المخزون', 'url_path' => 'setup/system-variables.php', 'badge' => 'قريبًا'],
+                        ['id' => 'setup-inventory-variables', 'label' => 'متغيرات المخزون', 'url_path' => 'setup/system-variables.php'],
                         ['id' => 'setup-units', 'label' => 'وحدات القياس', 'url_path' => 'setup/units.php'],
                         ['id' => 'setup-price-levels', 'label' => 'مستويات التسعيرة', 'url_path' => 'setup/price-levels.php'],
                         ['id' => 'setup-supply-types', 'label' => 'أنواع التوريد', 'url_path' => 'setup/supply-types.php'],
@@ -204,7 +204,7 @@ function get_menu_sections(): array {
                     'children' => [
                         ['id' => 'inputs-cash-boxes', 'label' => 'شاشة الصناديق', 'url_path' => 'inputs/cash-boxes.php'],
                         ['id' => 'inputs-banks', 'label' => 'شاشة البنوك', 'url_path' => 'inputs/banks.php'],
-                        ['id' => 'inputs-opening-balances', 'label' => 'الأرصدة الافتتاحية', 'url_path' => 'inputs/opening-balances.php', 'badge' => 'قريبًا'],
+                        ['id' => 'inputs-opening-balances', 'label' => 'الأرصدة الافتتاحية', 'url_path' => 'inputs/opening-balances.php'],
                     ],
                 ],
                 [
@@ -214,8 +214,8 @@ function get_menu_sections(): array {
                         ['id' => 'inputs-warehouse-groups', 'label' => 'مجموعات المخازن', 'url_path' => 'setup/warehouse-groups.php'],
                         ['id' => 'inputs-warehouses', 'label' => 'بيانات المخازن', 'url_path' => 'inputs/warehouses.php'],
                         ['id' => 'inputs-items', 'label' => 'بيانات الأصناف', 'url_path' => 'inputs/items.php'],
-                        ['id' => 'inputs-item-prices', 'label' => 'تسعيرة الأصناف', 'url_path' => 'inputs/item-prices.php', 'badge' => 'قريبًا'],
-                        ['id' => 'inputs-item-stock', 'label' => 'المخزون الافتتاحي', 'url_path' => 'inputs/item-stock.php', 'badge' => 'قريبًا'],
+                        ['id' => 'inputs-item-prices', 'label' => 'تسعيرة الأصناف', 'url_path' => 'inputs/item-prices.php'],
+                        ['id' => 'inputs-item-stock', 'label' => 'المخزون الافتتاحي', 'url_path' => 'inputs/item-stock.php'],
                     ],
                 ],
                 [
@@ -243,18 +243,18 @@ function get_menu_sections(): array {
                         ['id' => 'ops-payment-vouchers', 'label' => 'سندات الصرف', 'url_path' => 'operations/payment-vouchers.php'],
                         ['id' => 'ops-receipt-vouchers', 'label' => 'سندات القبض', 'url_path' => 'operations/receipt-vouchers.php'],
                         ['id' => 'ops-daily-entries', 'label' => 'القيود اليومية', 'url_path' => 'operations/daily-entries.php'],
-                        ['id' => 'ops-currency-diff', 'label' => 'فوارق العملة', 'url_path' => '#', 'badge' => 'قريبًا'],
-                        ['id' => 'ops-debit-notes', 'label' => 'الإشعارات المدينة', 'url_path' => '#', 'badge' => 'قريبًا'],
-                        ['id' => 'ops-credit-notes', 'label' => 'الإشعارات الدائنة', 'url_path' => '#', 'badge' => 'قريبًا'],
+                        ['id' => 'ops-currency-diff', 'label' => 'فوارق العملة', 'url_path' => 'operations/currency-diff.php'],
+                        ['id' => 'ops-debit-notes', 'label' => 'الإشعارات المدينة', 'url_path' => 'operations/debit-notes.php'],
+                        ['id' => 'ops-credit-notes', 'label' => 'الإشعارات الدائنة', 'url_path' => 'operations/credit-notes.php'],
                     ],
                 ],
                 [
                     'label' => 'عمليات أنظمة المخزون', 'icon' => 'boxes',
                     'children' => [
-                        ['id' => 'ops-supply-orders', 'label' => 'أمر التوريد المخزني', 'url_path' => 'operations/supply-orders.php', 'badge' => 'قريبًا'],
-                        ['id' => 'ops-discharge-orders', 'label' => 'أمر الصرف المخزني', 'url_path' => 'operations/discharge-orders.php', 'badge' => 'قريبًا'],
-                        ['id' => 'ops-inventory-transfers', 'label' => 'التحويل المخزني', 'url_path' => 'operations/inventory-transfers.php', 'badge' => 'قريبًا'],
-                        ['id' => 'ops-inventory-adjustments', 'label' => 'تسوية المخزون', 'url_path' => 'operations/inventory-adjustments.php', 'badge' => 'قريبًا'],
+                        ['id' => 'ops-supply-orders', 'label' => 'أمر التوريد المخزني', 'url_path' => 'operations/supply-orders.php'],
+                        ['id' => 'ops-discharge-orders', 'label' => 'أمر الصرف المخزني', 'url_path' => 'operations/discharge-orders.php'],
+                        ['id' => 'ops-inventory-transfers', 'label' => 'التحويل المخزني', 'url_path' => 'operations/inventory-transfers.php'],
+                        ['id' => 'ops-inventory-adjustments', 'label' => 'تسوية المخزون', 'url_path' => 'operations/inventory-adjustments.php'],
                     ],
                 ],
                 [
@@ -283,7 +283,7 @@ function get_menu_sections(): array {
             'items' => [
                 ['id' => 'system-users', 'label' => 'بيانات المستخدمين', 'icon' => 'users', 'url_path' => 'system/users.php'],
                 ['id' => 'system-activity-logs', 'label' => 'سجل النشاط', 'icon' => 'activity', 'url_path' => 'system/activity-logs.php'],
-                ['id' => 'system-backup', 'label' => 'النسخ الاحتياطي', 'icon' => 'database', 'url_path' => '#', 'badge' => 'قريبًا'],
+                ['id' => 'system-backup', 'label' => 'النسخ الاحتياطي', 'icon' => 'database', 'url_path' => 'system/backup.php'],
             ],
         ],
     ];

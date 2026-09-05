@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../includes/header.php';
 $invoiceType = $_GET['type'] ?? 'purchase';
-$isPurchase = str_starts_with($invoiceType, 'purchase');
+$isPurchase = (strpos($invoiceType, 'purchase') === 0);
 $suppliers = db_fetch_all("SELECT id, code, name_ar FROM suppliers WHERE active=1 ORDER BY code");
 $customers = db_fetch_all("SELECT id, code, name_ar FROM customers WHERE active=1 ORDER BY code");
 $currencies = db_fetch_all("SELECT id, code, name_ar FROM currencies WHERE active=1 ORDER BY code");
