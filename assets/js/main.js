@@ -1,6 +1,15 @@
 /* نظام أونكس ERP — JavaScript الرئيسي */
 
-// تبديل القوائم الفرعية في الشريط الجانبي
+// تبديل القوائم الفرعية في الشريط الجانبي (النظام الجديد)
+function onyxToggle(id, hdr) {
+    var el = document.getElementById(id);
+    if (el) {
+        el.classList.toggle('open');
+        hdr.classList.toggle('open');
+    }
+}
+
+// تبديل القوائم الفرعية (النظام القديم — للتوافق)
 function toggleSubmenu(button) {
     button.classList.toggle('expanded');
     var submenu = button.nextElementSibling;
