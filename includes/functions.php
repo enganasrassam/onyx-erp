@@ -64,7 +64,13 @@ function status_badge(string $status): string {
  * إعادة توجيه
  */
 function redirect(string $url): void {
-    header("Location: $url");
+    if (!headers_sent()) {
+        header("Location: $url");
+        exit;
+    }
+    // fallback: JavaScript redirect إذا كانت headers مرسلة
+    echo '<script>window.location.href="' . addslashes($url) . '";</script>';
+    echo '<noscript><meta http-equiv="refresh" content="0;url=' . htmlspecialchars($url) . '"></noscript>';
     exit;
 }
 
@@ -115,7 +121,7 @@ function db_fetch_all(string $sql, array $params = []): array {
 
 function db_insert(string $table, array $data): int {
     global $pdo;
-    $columns = implode(', ', array_keys($data));
+    $columns = implode(', ', array_map(function($k) { return "`{$k}`"; }, array_keys($data)));
     $placeholders = implode(', ', array_fill(0, count($data), '?'));
     $sql = "INSERT INTO `{$table}` ({$columns}) VALUES ({$placeholders})";
     db_query($sql, array_values($data));

@@ -130,6 +130,16 @@ function csrf_token(): string {
 }
 
 function verify_csrf(): bool {
-    $token = $_POST['csrf_token'] ?? $_SERVER['HTTP_X_CSRF_TOKEN'] ?? '';
-    return !empty($token) && hash_equals($_SESSION['csrf_token'] ?? '', $token);
+    $token = $_POST['csrf_token'] ?? '';
+    if (empty($token) && isset($_SERVER['HTTP_X_CSRF_TOKEN'])) {
+        $token = $_SERVER['HTTP_X_CSRF_TOKEN'];
+    }
+    if (empty($token)) {
+        return false;
+    }
+    $sessionToken = $_SESSION['csrf_token'] ?? '';
+    if (empty($sessionToken)) {
+        return false;
+    }
+    return hash_equals($sessionToken, $token);
 }

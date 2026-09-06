@@ -37,8 +37,13 @@ define('SESSION_NAME', 'ONYX_SESSION');
 date_default_timezone_set('Asia/Aden');
 
 // عرض الأخطاء (عطّله في الإنتاج)
-error_reporting(E_ALL);
+error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING & ~E_DEPRECATED);
 ini_set('display_errors', '1');
+
+// تشغيل output buffering — ضروري لعمل redirect() بعد إخراج HTML
+if (!ob_get_level()) {
+    ob_start();
+}
 
 // اللغة
 define('APP_LANG', 'ar');
