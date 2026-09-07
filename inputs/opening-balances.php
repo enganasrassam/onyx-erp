@@ -92,7 +92,9 @@ $capital = $diffLocal;
 $isBalanced = abs($diffLocal) < 0.01 && abs($diffForeign) < 0.01;
 
 // ====== الخيارات ======
-$accounts = db_fetch_all("SELECT id, code, name_ar, account_type FROM accounts WHERE is_detail = 1 AND active = 1 ORDER BY code");
+// إظهار كل الحسابات النشطة (وليس فقط is_detail) — مطابق لأونكس
+// لأن المستخدم قد يضيف حسابًا جديدًا في الدليل ويريد إدخال رصيد له فورًا
+$accounts = db_fetch_all("SELECT id, code, name_ar, account_type, account_nature FROM accounts WHERE active = 1 ORDER BY code");
 $currencies = db_fetch_all("SELECT id, code, name_ar, symbol, is_foreign FROM currencies WHERE active = 1 ORDER BY code");
 $editBalance = $editingId ? db_fetch_one("SELECT * FROM opening_balances WHERE id = ?", [$editingId]) : null;
 

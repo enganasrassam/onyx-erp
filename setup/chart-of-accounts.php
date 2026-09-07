@@ -61,11 +61,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && verify_csrf()) {
     $nature = $_POST['nature'] ?? 'debit';
     $reportType = $_POST['report_type'] ?? 'balance_sheet';
     $analyticalType = $_POST['analytical_type'] ?? 'general';
-    $openingBalance = (float)($_POST['opening_balance'] ?? 0);
     $active = isset($_POST['active']) ? 1 : 0;
     $isDetail = isset($_POST['is_detail']) ? 1 : 0;
     $currencyIds = isset($_POST['currency_ids']) ? implode(',', $_POST['currency_ids']) : null;
     $eid = (int)($_POST['edit_id'] ?? 0);
+
+    // إذا كان حساب فرعي، اجعله تفصيليًا تلقائيًا (يقبل الأرصدة والقيود)
+    if ($accountNature === 'sub') {
+        $isDetail = 1;
+    }
 
     // تحديد المستوى بناءً على الحساب الأب
     $level = 1;
@@ -102,7 +106,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && verify_csrf()) {
             'report_type' => $reportType,
             'analytical_type' => $analyticalType,
             'currency_ids' => $currencyIds,
-            'opening_balance' => $openingBalance,
         ];
         if ($eid) {
             db_update('accounts', $data, 'id = ?', [$eid]);
@@ -379,12 +382,6 @@ function renderNode($node, $depth, $byParent, $typeLabels, $analyticalLabels) {
                                 <label><input type="checkbox" name="currency_ids[]" value="<?= $c['id'] ?>" <?= $editAccount && in_array($c['id'], explode(',', $editAccount['currency_ids'] ?? '')) ? 'checked' : '' ?>> <?= sanitize($c['code']) ?> — <?= sanitize($c['name_ar']) ?></label>
                             <?php endforeach; ?>
                         </div>
-                    </div>
-
-                    <!-- الرصيد الافتتاحي -->
-                    <div class="coa-field">
-                        <label class="coa-field-label">الرصيد الافتتاحي</label>
-                        <input type="number" step="0.01" name="opening_balance" class="coa-input font-mono" dir="ltr" value="<?= $editAccount['opening_balance'] ?? 0 ?>">
                     </div>
 
                     <!-- خيارات -->
